@@ -1,0 +1,122 @@
+package com.stockManagementSystem.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class ManageGeneralOrExtraInformationDao {
+	public static boolean addExtra(String entity, String contact, String social, String email, String location) {
+		boolean status=false;  
+		
+		try{  
+			Class.forName("oracle.jdbc.driver.OracleDriver");  
+			Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","system");  
+			      
+			PreparedStatement ps=con.prepareStatement("insert into sms_extra values (SMS_FOOTER_SEQ.nextval,?,?,?,?,?)");   
+			ps.setString(1,entity);
+			ps.setString(2,contact);  
+			ps.setString(3,social);
+			ps.setString(4,email);
+			ps.setString(5,location);
+			      
+			ps.executeUpdate();
+            ps.clearParameters(); 
+			status=true;
+			
+			if (con != null && !con.isClosed())
+			{
+				con.close();
+				Thread.sleep(1000);
+			}
+		          
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}  
+		return status;  
+	}  
+	
+	public static boolean editExtra( String id, String entity, String contact, String social, String email, String location) {
+		boolean status=false;  
+		
+		try{  
+			Class.forName("oracle.jdbc.driver.OracleDriver");  
+			Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","system");  
+			      
+			PreparedStatement ps=con.prepareStatement("update sms_extra set entity=?, contact=?, social=?, email=?, location=? where id=?");   
+			ps.setString(1,entity);
+			ps.setString(2,contact);  
+			ps.setString(3,social);
+			ps.setString(4,email);
+			ps.setString(5,location);
+			ps.setString(6,id);
+			      
+			ps.executeUpdate();
+            ps.clearParameters(); 
+			status=true;
+			
+			if (con != null && !con.isClosed())
+			{
+				con.close();
+				Thread.sleep(1000);
+			}
+		          
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}  
+		return status;  
+	}  
+	
+	public static boolean removeExtra(String listId) {
+		boolean status=false;  
+		
+		try{  
+			Class.forName("oracle.jdbc.driver.OracleDriver");  
+			Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","system");  
+			      
+			PreparedStatement ps=con.prepareStatement("delete from sms_extra where id=?");   
+			ps.setString(1,listId);
+			      
+			ps.executeUpdate();
+            ps.clearParameters(); 
+			status=true;
+		          
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}  
+		return status;   
+	}
+
+	public static boolean editGeneral(String applicationVersion, String rightYear, String rightEntity, String rightReserved, String applicationEmailId) {
+		boolean status=false;  
+		
+		try{  
+			Class.forName("oracle.jdbc.driver.OracleDriver");  
+			Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","system");  
+			      
+			PreparedStatement ps=con.prepareStatement("update sms_general set right_time_span=?, right_entity=?, right_reserved=?, application_version=?, application_email_id=? where id=0");   
+			ps.setString(1,rightYear);
+			ps.setString(2,rightEntity);  
+			ps.setString(3,rightReserved);
+			ps.setString(4,applicationVersion);
+			ps.setString(5,applicationEmailId);
+			
+			ps.executeUpdate();
+            ps.clearParameters(); 
+			status=true;
+			
+			if (con != null && !con.isClosed())
+			{
+				con.close();
+				Thread.sleep(1000);
+			}
+		          
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}  
+		return status;  
+	}  
+}

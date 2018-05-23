@@ -1,0 +1,82 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="java.sql.*" %>
+<%	
+	Class.forName("oracle.jdbc.driver.OracleDriver");  
+	Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","system"); 
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<link rel="icon" href="images/general/favicon.ico">
+	<title>edit manager</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="stockManagementSystem.css">	
+</head>
+<body>
+	<jsp:include page="header.jsp"></jsp:include>
+	<div class="body">
+		<form name="formManageManagersListEdit"  action="ManageManagersListEditService" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="hiddenFieldButtonClicked">
+<%
+	String editId = (String)request.getAttribute("editId");
+	
+    PreparedStatement ps=con.prepareStatement("select * from sms_managers where id=?"); 
+	ps.setString(1,editId);  
+    
+	ResultSet rs=ps.executeQuery();  
+	rs.next();
+%>	
+			<table>
+				<tr>
+					<td colspan="2" class="title">EDIT MANAGER
+						<input type="hidden" name="hiddenFieldId" value="<%=rs.getInt(1)%>">
+					</td>
+				</tr>
+				<tr>
+					<td class="information_title">Manager Id</td>
+					<td class="information"><input type="text" name="textFieldManagerId" value="<%=rs.getString(2)%>"></td>
+				</tr>
+				<tr>
+					<td class="information_title">Password</td>
+					<td class="information"><input type="text" name="textFieldPassword" value="<%=rs.getString(3)%>"></td>
+				</tr>
+				<tr>
+					<td class="information_title">Recovery Question</td>
+					<td class="information"><input type="text" name="textFieldRecoveryQuestion" value="<%=rs.getString(4)%>"></td>
+				</tr>
+				<tr>
+					<td class="information_title">Recovery Answer</td>
+					<td class="information"><input type="text" name="textFieldRecoveryAnswer" value="<%=rs.getString(5)%>"></td>
+				</tr>
+				<tr>
+					<td class="information_title">Email Id</td>
+					<td class="information"><input type="text" name="textFieldEmailId" value="<%=rs.getString(6)%>"></td>
+				</tr>
+				<tr>
+					<td class="information_title">Picture</td>
+					<td class="information"><input type="file" name="filePicture"></td>
+				</tr>
+				<tr>
+					<td colspan="2" class="information_title">
+						<input type="submit" value="edit" name="buttonEdit" style="width:100%;" onclick="{document.formManageManagersListEdit.hiddenFieldButtonClicked.value=this.name;document.formManageManagersListEdit.submit();}">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>
+<%
+	try {
+		if (con != null && !con.isClosed())
+		{
+			con.close();
+			Thread.sleep(1000);
+		}
+	}
+	catch (SQLException e) {
+		e.printStackTrace();
+	}
+%>

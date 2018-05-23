@@ -1,0 +1,104 @@
+@CHARSET "ISO-8859-1";
+* {
+    box-sizing: border-box;
+}
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+[class*="col-"] {
+    float: left;
+    padding: 5px;
+}
+/* For mobile phones: */
+[class*="col-"] {
+    width: 100%;
+}
+@media only screen and (min-width: 700px) {
+    /* For desktop: */
+    .col-1 {width: 8.33%;}
+    .col-2 {width: 16.66%;}
+    .col-3 {width: 25%;}
+    .col-4 {width: 33.33%;}
+    .col-5 {width: 41.66%;}
+    .col-6 {width: 50%;}
+    .col-7 {width: 58.33%;}
+    .col-8 {width: 66.66%;}
+    .col-9 {width: 75%;}
+    .col-10 {width: 83.33%;}
+    .col-11 {width: 91.66%;}
+    .col-12 {width: 100%;}
+}
+table {
+	width: 100%;
+}
+input {
+	color: rgb(174,87,65);
+	outline:0;
+}
+input[type=text], input[type=password] {
+	width: 100%;
+}
+.header, .footer {
+	background-image: url("images/general/background.png");
+  	background-repeat: repeat;
+    text-align: center;
+    color: white;
+}
+.header img, .body table img {
+	width: auto;
+	max-width: 100%;
+	max-height: 110px;
+	height: auto;
+}
+.header input[type=submit] {
+	background-color: rgba(255,255,255,0.8);
+}
+.header input[type=submit]:hover {
+	background-color: rgba(255,255,255,0.9);
+}
+.body {
+    text-align: center;
+    color: rgb(174,87,65);
+    background-color: rgba(255,255,255,1);
+}
+.body input[type=submit] {
+	background-color: rgba(174,87,65,0.2);
+}
+.body input[type=submit]:hover {
+	background-color: rgba(174,87,65,0.1);
+}
+.body .systemLogo {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+}	
+.body .title {
+	font-weight: bold;
+	border-right: 5px solid rgb(174,87,65);
+	border-left: 5px solid rgb(174,87,65);
+	border-top: 5px solid rgb(174,87,65);
+}	
+.body [class*="title"] {
+	border-bottom: 3px solid rgb(174,87,65);
+	background-color: rgba(174,87,65,0.2);
+}	
+.body .information {
+	width: 100%;
+	border-bottom: 1px solid rgb(174,87,65);
+	background-color: rgba(174,87,65,0.1);
+}
+.footer img {
+	height: 60px;
+    width: 60px;
+}
+.footer [class*="title"] {
+	border-bottom: 3px solid white;
+	background-color: rgba(174,87,65,0.5);
+}	
+.footer .information {
+	width: 50%;
+	border-bottom: 1px solid white;
+	background-color: rgba(174,87,65,0.9);
+}

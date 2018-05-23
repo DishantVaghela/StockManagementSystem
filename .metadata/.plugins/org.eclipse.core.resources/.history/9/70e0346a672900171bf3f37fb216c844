@@ -1,0 +1,11 @@
+package com.stockManagementSystem.dao;
+
+public class ManageStockDao {
+
+	public static boolean add(String description, String deliveryDay, String permittedBy, String grantName,
+			String quantity, String cost, String isDeadStock) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}
